@@ -1,12 +1,10 @@
 package ge.map.djikra.Drawables;
 
 import ge.map.djikra.Logic.Dijkstra;
-import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
@@ -48,7 +46,7 @@ public class GridCanvas extends Pane {
                 Rectangle wholeRectangle = new Rectangle(column * cellSize, row * cellSize, cellSize, cellSize);
                 //v Xcoordinate from where to start , v1 Ycoordinate where to start ,cellsize zoma
                 wholeRectangle.setStroke(Color.GRAY);
-                wholeRectangle.setFill(Color.color(1, 1, 1, 0.1));
+                wholeRectangle.setFill(Color.color(1, 1, 1, 0.1));//
                 Cell cell = new Cell(row, column, wholeRectangle);
                 grid[row][column] = cell;
 
@@ -65,7 +63,7 @@ public class GridCanvas extends Pane {
                     } else if (clickOnMouse.getButton() == MouseButton.SECONDARY) {
                         if (cell != startPoint && cell != endPoint) {
                             cell.isWall = !cell.isWall;
-                            wholeRectangle.setFill(cell.isWall ? Color.BLACK : Color.WHITE);
+                            wholeRectangle.setFill(cell.isWall ? Color.GRAY : Color.WHITE);
                         }
                     }
                 });
@@ -82,7 +80,7 @@ public class GridCanvas extends Pane {
 
         for (Cell cell : path) {
             if (cell != startPoint && cell != endPoint) {
-                cell.rect.setFill(Color.DEEPSKYBLUE);
+                cell.rect.setFill(Color.MAGENTA);
             }
         }
     }
@@ -106,8 +104,7 @@ public class GridCanvas extends Pane {
             //  {0, -1}: Left
             List<Cell> neighbors = new ArrayList<>();
             int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-            for (int[] direction : directions)
-            {
+            for (int[] direction : directions) {
                 int newRow = currentStandingRow + direction[0];
                 int newColumn = currentStandingColumn + direction[1];
                 if (newRow >= 0 && newColumn >= 0 && newRow < grid.length && newColumn < grid[0].length) {
